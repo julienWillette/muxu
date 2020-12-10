@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Edit image | Admin Muxu{% endblock %}
+{% block content %}
+    <h1>Edit Image</h1>
+    <div class="container margin-current-image">
+        <span>Current image</span>
+        <img src="{{image.url}}" alt="" class="img-fluid" width="150px">
+    </div>
+    {% include 'Image/_form.html.twig' %}
+    <a href="/image/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Return to the list</a><br>
+    <a href="/image/show/{{ image.id }}" class="btn btn-sm my-2 back-color">Back</a>
+{% endblock %}

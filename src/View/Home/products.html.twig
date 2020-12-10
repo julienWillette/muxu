@@ -1,0 +1,192 @@
+{% extends 'layout_user.html.twig' %}
+{% block title %}Artworks | MUXU{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid header-category-bg d-none d-md-block d-lg-block">
+    <div class="row justify-content-around align-items-center mr-2">
+        <div class="col-xl-1 col-lg-1 col-md-1 d-flex text-center pt-3">
+            <form action="" method="post">
+                <div class="category-size">
+                    <img src="https://i.postimg.cc/WzcBLHGt/plantsleaves-118371.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="1">
+                    <button type="submit" class="btn ">
+                        <p>Natural green</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 d-flex text-center pt-3">
+            <form action="" method="post">
+                <div class="category-size">
+                    <img src="https://i.postimg.cc/br767D1P/1455554749-line-57-icon-icons-com-53372.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="2">
+                    <button type="submit" class="btn header-category-bg">
+                        <p>Wood brown</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 d-flex text-center pt-3">
+            <form action="" method="post">
+                <div class="category-size-ocean">
+                    <img src="https://i.postimg.cc/RhPNbKts/Fichier-1-4x-copie.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="4">
+                    <button type="submit" class="btn header-category-bg ">
+                        <p class="pt-1">Ocean blue</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 d-flex text-center pt-3">
+            <form action="" method="post">
+                <div class="category-size">
+                    <img src="https://i.postimg.cc/25qMqDTV/Fichier-1-4x.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="3">
+                    <button type="submit" class="btn header-category-bg">
+                        <p>Street grey</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="accordion">
+    <div class="header-category-bg d-md-none text-center">
+        <div class="" id="headingOne">
+            <h5 class="p-4">
+                <button class="btn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                    aria-controls="collapseOne">
+                    <h3>Select categories <i class="fas fa-angle-down"></i></h3>
+                </button>
+            </h5>
+        </div>
+    </div>
+    <div id="collapseOne" class="collapse header-category-bg" aria-labelledby="headingOne" data-parent="#accordion">
+        <form action="" method="post">
+            <div class="category-responsive">
+                <div class="text-center">
+                    <img src="https://i.postimg.cc/WzcBLHGt/plantsleaves-118371.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="1">
+                    <button type="submit" class="btn">
+                        <p>Natural green</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form action="" method="post">
+            <div class="category-responsive">
+                <div class="text-center">
+                    <img src="https://i.postimg.cc/br767D1P/1455554749-line-57-icon-icons-com-53372.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="2">
+                    <button type="submit" class="btn">
+                        <p>Wood brown</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form action="" method="post">
+            <div class="category-responsive">
+                <div class="text-center">
+                    <img src="https://i.postimg.cc/RhPNbKts/Fichier-1-4x-copie.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="4">
+                    <button type="submit" class="btn">
+                        <p>Ocean blue</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form action="" method="post">
+            <div class="category-responsive">
+                <div class="text-center">
+                    <img src="https://i.postimg.cc/25qMqDTV/Fichier-1-4x.png" />
+                    <input type="text" class="d-none" name="category_id" id="category_id" value="3">
+                    <button type="submit" class="btn">
+                        <p>Street grey</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container mt-4">
+    {% if session.flash_message_product is not empty %}
+    {% for message in session.flash_message_product %}
+    <div class="col-12">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="clear_flash">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+    
+<div class="container pb-5">
+    <div class="row">
+        {% for product in products %}
+        {% if product.is_activated == true %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-3 mt-4">
+            <div class="card-group">
+                <div class="card product-click">
+                    <a href="/home/show/{{ product.id }}"><img src="{{product.images[0].url}}"
+                            class="card-img-top size-img-products" alt="{{product.name}}"></a>
+                    <div class="card-body">
+                        <div class="float-right">
+                            {% if session.user is not empty %}
+                            {% if product.is_liked == true %}
+                            <form method="POST">
+                                <input type="text" class="d-none" name="dislike" value="{{product.id}}">
+                                <button type="submit" class="btn navbar-brand">
+                                    <i class="fas fa-heart heart-liked-color"></i>
+                                </button>
+                            </form>
+                            {% else %}
+                            <form method="POST">
+                                <input type="text" class="d-none" name="like" value="{{product.id}}">
+                                <button type="submit" class="btn navbar-brand">
+                                    <i class="far fa-heart heart-color"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-title by-artist">By
+                            {{product.artist_firstname}} {{product.artist_lastname}}</p>
+                        {% if product.quantity > 0 %}
+                        <p class="text-left">{{product.price}}€</p>
+                        {% else %}
+                        <p class="text-left">Sold-out</p>
+                        {% endif %}
+                        <div class="clearfix">
+                            <div class="float-left">
+                                {% if product.quantity > 0 %}
+                                <form method="POST">
+                                    <input type="text" class="d-none" name="add_product" value="{{product.id}}">
+                                    <button type="submit" class="btn">
+                                        <i class="fas fa-shopping-bag basket-size"></i>
+                                    </button>
+                                </form>
+                                {% else %}
+                                <button class="btn">
+                                    <i class="fa fa-times basket-size" aria-hidden="true"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                            <div class="float-right discover-color">
+                                <a href="/home/show/{{ product.id }}" class="discover-color">More details ></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

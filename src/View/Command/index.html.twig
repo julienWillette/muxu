@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+{% block title %}List Commands | Admin Muxu{% endblock %}
+{% block content %}
+<h1 class="display-4">Commands</h1>
+<table class="table table-responsive{-sm|-md|-lg|-xl} table-bg">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for command in commands %}
+                <tr>
+                    <th scope="row">{{command.id}}</th>
+                    <td>{{command.lastname}} {{command.firstname}}</td>
+                    <td>{{command.address}}</td>
+                    <td>{{command.total}} $</td>
+                    <td>{{command.created_at|date('Y-m-d')}}</td>
+                    <td>
+                        <a href="/command/show/{{ command.id }}" class="btn btn-sm my-2 eye-color"><i
+                        class="fas fa-eye logo-eye"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

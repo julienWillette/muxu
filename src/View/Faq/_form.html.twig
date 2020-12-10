@@ -1,0 +1,16 @@
+<div class="container">
+<form method="post">
+    <input type="hidden" value="{{ faq.id }}" name="id">
+    <div class="form-group">
+        <label for="name">Question</label>
+        <input type="text" class="form-control" id="question" value="{{ faq.question}}" name="question" required>
+    </div>
+    <div class="form-group">
+        <label for="name">Answer</label>
+        <input type="text" class="form-control" id="answer" value="{{ faq.answer}}" name="answer" required>
+    </div>
+    <div class="card-footer text-center">
+        <button type="submit" value="Valider" class="btn submit-color">Submit</button>
+    </div>
+</form>
+</div>

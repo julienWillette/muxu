@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+{% block title %}List images | Admin Muxu{% endblock %}
+{% block content %}
+<h2 class="display-4">Images</h2>
+<div class="text-right my-3">
+    <a href="/image/add" class="btn btn-sm plus-color">Add a new image <i class="fas fa-plus-circle"></i></a>
+</div>
+<table class="table table-responsive{-sm|-md|-lg|-xl} table-bg">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Artist associated</th>
+            <th scope="col">Product associated</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for image in images %}
+        <tr>
+            <td><img src="{{image.url}}" alt="" class="img-fluid" width="150px"></td>
+            <td>{{ image.artist_firstname }} {{ image.artist_lastname }}</td>
+            <td>{{ image.product_name }}</td>
+            <td>
+                <a href="/image/show/{{ image.id }}" class="btn btn-sm my-2 eye-color"><i class="fas fa-eye logo-eye"></i></a>
+                <a href="/image/edit/{{ image.id }}" class="btn btn-sm my-2 edit-color"><i class="fas fa-edit logo-edit"></i></a>
+                <a href="/image/delete/{{ image.id }}" class="btn btn-sm btn-danger my-2"><i
+                        class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

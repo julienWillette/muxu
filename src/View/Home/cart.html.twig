@@ -1,0 +1,300 @@
+{% extends 'layout_user.html.twig' %}
+{% block title %}Cart | Muxu{% endblock %}
+
+{% block content %}
+<div class="mt-1">
+</div>
+<div class="container-fluid">
+	<div class="row">
+		{% if session.cart %}
+		<div class="col-lg-6 col-md-12 col-sm-12 bg-panier-form pt-5 pl-2">
+			<table class="table table-responsive{-sm|-md|-lg|-xl} table-image w-auto">
+				<tbody>
+					{% for i in 0..cartInfos|length -1 %}
+					<tr class="table-borderless">
+						<td><img src="{{cartInfos[i].url}}" class="" width="150px" alt="{{cartInfos[i].name}}"> <p class="d-lg-none d-md-none d-sm-none pt-2">{{cartInfos[i].name}}</p></td>
+						<td>
+							<p class="d-none d-sm-block pt-2">{{cartInfos[i].name}}</p>
+						</td>
+						<td>
+							<p>{{cartInfos[i].price}}€</p>
+						</td>
+						<td>
+							<p>{{cartInfos[i].quantity}}</p>
+						</td>
+						<td>
+							<form method="POST">
+								<input type="text" class="d-none" name="delete_id" value="{{cartInfos[i].id}}">
+								<button type="submit" class="btn">
+									<p>
+										<i class="fas fa-trash"></i>
+									</p>
+									</a>
+							</form>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>SUBTOTAL</p>
+						</td>
+						<td></td>
+						<td>
+							<p>{{cartInfos[i].price * cartInfos[i].quantity }}€</p>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<table class="table table-responsive{-sm|-md|-lg|-xl} w-auto">
+				<tbody>
+					<tr>
+						<td>
+							<p>TOTAL CART</p>
+							<h3>{{total}}€</h3>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-lg-6 col-md-12 col-sm-12">
+			<div class="m-5">
+				{% if session.user %}
+				<p class="form-title">Contact Information</p>
+				{% if errorForm is not null %}
+				<div class="alert alert-danger" role="alert">
+					{{ errorForm }}
+				</div>
+				{% endif %}
+
+				<form method="POST">
+					<input type="text" class="d-none" id="id" name="id" value="{{user.id}}">
+					<div class="form-group form-style">
+						<label for="firstname"></label>
+						<input type="text" class="form-control" name="firstname" id="firstname"
+							value="{{user.firstname}}">
+					</div>
+					<div class="form-group form-style">
+						<label for="lastname"></label>
+						<input type="text" class="form-control" name="lastname" id="name" value="{{user.lastname}}">
+					</div>
+					<div class="form-group form-style">
+						<label for="email"></label>
+						<input type="email" class="form-control" name="email" id="email" value="{{user.email}}">
+					</div>
+					<div class="form-group form-style">
+						<label for="address"></label>
+						<input type="text" class="form-control" name="address" id="address" value="{{user.address}}">
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input d-none" type="checkbox" id="newsletter" value="true" name="newsletter"
+							{{user.newsletter ? 'checked' : ''}}>
+						<label class="form-check-label d-none" for="newsletter">Receive Muxu Newsletter</label>
+					</div>
+					<p class="form-title">Payment</p>
+					<hr class="hr-color">
+					<input type="text" class="d-none" name="user_id" value="{{session.user.id}}">
+					<input type="text" class="d-none" name="payment">
+					<div class="form-group form-style">
+						<label for="Name"></label>
+						<input type="text" class="form-control" name='name' id="name" placeholder="Cardholder Name *">
+
+
+						<!-- STRIPE -->
+						<input type='text' id="token" name='stripeToken' style="display: none" value="">
+						<div id="card" class="my-5"></div>
+						<!-- END STRIPE -->
+						<div class="small">* Mandatory fields</div>
+						<div class="text-center my-4">
+							<button type="submit" class="btn button-color" id="submit">Confirm payment</button>
+						</div>
+				</form>
+				{% else %}
+				<div class="jumbotron my-5 menu-account-bg text-black">
+					{% if session.flash_message is not empty %}
+					{% for message in session.flash_message %}
+					<div class="col-12">
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<strong>{{message}}</strong>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"
+								id="clear_flash">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					</div>
+					{% endfor %}
+					{% endif %}
+					<h1 class="mb-5 text-center">Login</h1>
+					<div class="row">
+						<div class="col-lg-6 col-md-12 col-sm-12 m-auto">
+							<form method="POST">
+								<div class="form-group">
+									<label for="email" class="d-none">Email</label>
+									<div class="row">
+										<div class="col-lg-1 col-md-1 col-xs-1 text-center">
+											<i class="fas fa-user input-prefix"></i>
+										</div>
+										<div class="col-lg-11 col-md-11 col-xs-11">
+											<input type="email" class="form-control" id="email" name="email"
+												placeholder="email" required>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="d-none">Password</label>
+									<div class="row">
+										<div class="col-lg-1 col-md-1 col-xs-1 text-center">
+											<i class="fas fa-lock prefix"></i>
+										</div>
+										<div class="col-lg-11 col-md-11 col-xs-11">
+											<input type="password" class="form-control validate" id="password-field"
+												name="password" placeholder="password" required>
+											<span toggle="#password-field"
+												class="fa fa-fw fa-eye field-icon toggle-password"></span>
+										</div>
+									</div>
+								</div>
+								<div class="">
+									<div class="text-center">
+										<button type="submit" class="btn button-color">SUBMIT</button>
+									</div>
+									<div class="text-left mt-4">
+										<p>Don't have an account yet?
+											<br>
+											Create one!</p>
+										<a class="btn button-register text-right" href="/security/register"
+											role="button">REGISTER</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% if session.user %}
+<div class="container-fluid mt-3">
+	<h2>Your wishlist</h2>
+	<hr>
+	<div class="row">
+		{% for product in wishlist %}
+		{% if product.is_activated == true %}
+		<div class="col-lg-3 col-md-6 col-sm-12 my-3 mt-4">
+			<div class="card product-click">
+				<a href="/home/show/{{ product.id }}"><img src="{{product.url}}" class="card-img-top size-img-products"
+						alt="{{product.name}}"></a>
+				<div class="card-body text-left">
+					<div class="float-right">
+						{% if session.user is not empty %}
+						{% if product.is_liked == true %}
+						<form method="POST">
+							<input type="text" class="d-none" name="dislike" value="{{product.id}}">
+							<button type="submit" class="btn navbar-brand">
+								<i class="fas fa-heart heart-liked-color"></i>
+							</button>
+						</form>
+						{% else %}
+						<form method="POST">
+							<input type="text" class="d-none" name="like" value="{{product.id}}">
+							<button type="submit" class="btn navbar-brand">
+								<i class="far fa-heart heart-color"></i>
+							</button>
+						</form>
+						{% endif %}
+						{% endif %}
+					</div>
+					<h5 class="card-title">{{product.name}}</h5>
+					<p class="card-title by-artist">By {{product.artist_firstname}} {{product.artist_lastname}}</p>
+					{% if product.quantity > 0 %}
+					<p class="text-left">{{product.price}}€</p>
+					{% else %}
+					<p class="text-left">Sold-out</p>
+					{% endif %}
+					<div class="clearfix">
+						<div class="float-left">
+							{% if product.quantity > 0 %}
+							<form method="POST">
+								<input type="text" class="d-none" name="add_product" value="{{product.id}}">
+								<button type="submit" class="btn">
+									<i class="fas fa-shopping-bag basket-size"></i>
+								</button>
+							</form>
+							{% else %}
+							<button class="btn">
+								<i class="fa fa-times basket-size" aria-hidden="true"></i>
+							</button>
+							{% endif %}
+						</div>
+						<div class="float-right discover-color">
+							<a href="/home/show/{{ product.id }}" class="discover-color">More details ></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
+{% else %}
+<div class="container-fluid">
+	<div class="text-center my-4">
+		<h1 class="text-center">
+			<h2>Your cart is empty</h2>
+			<div class="">
+				<img src='https://i.postimg.cc/L8KMkVgR/undraw-shopping-app-flsj-1.png' class="img-fluid" />
+			</div>
+	</div>
+	{% endif %}
+</div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+	var stripe = Stripe('pk_test_iQgBUXqWjZa5DkyikWWKdami00Fauo176W');
+	let form = document.getElementById('card');
+	let displayError = document.getElementById('card-errors')
+	let inputToken = document.getElementById('token')
+	let submitButton = document.getElementById('submit')
+	var elements = stripe.elements();
+	var cardElement = elements.create('card');
+	cardElement.mount(form);
+	cardElement.on('change', (event) => {
+		if (event.complete) {
+			stripe.createToken(cardElement).then(result => {
+				if (result.token) {
+					inputToken.value = result.token.id;
+					submitButton.classList.remove('disabled');
+					displayError.classList.add('d-none');
+				} else if (result.error) {
+					alert(result.error)
+				}
+			})
+		} else if (event.error) {
+			displayError.classList.remove('d-none');
+			displayError.textContent = event.error.message;
+		}
+	});
+</script>
+
+<script>
+	$(".toggle-password").click(function () {
+
+		$(this).toggleClass("fa-eye fa-eye-slash");
+		var input = $($(this).attr("toggle"));
+		if (input.attr("type") == "password") {
+			input.attr("type", "text");
+		} else {
+			input.attr("type", "password");
+		}
+	});
+</script>
+{% endblock %}

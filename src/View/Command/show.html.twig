@@ -1,0 +1,83 @@
+{% extends 'layout.html.twig' %}
+{% block title %} Command n°{{ command.id }} | Admin Muxu{% endblock %}
+{% block content %}
+	<div class="card m-auto">
+		<div class="card-body">
+			<h1>Command details</h1>
+			<h5 class="card-title">Command number :
+				{{ command.id }}
+			</h5>
+			<h5 class="card-title">Created at :
+				{{ command.created_at }}</h5>
+			<hr class="hr-color">
+			<h2>Customer</h2>
+			<hr class="hr-color">
+			<p class="card-text">Name :
+				{{ command.lastname}}
+				{{ command.firstname}}</p>
+			<p class="card-text">Address :
+				{{ command.address}}</p>
+			<p class="card-text">E-mail :
+				{{ command.email }}
+			</p>
+			<hr class="hr-color">
+			<h2>Command</h2>
+			<table class="table table-responsive{-sm|-md|-lg|-xl} table-image">
+				<thead>
+					<tr>
+						<th scope="col">Reference</th>
+						<th scope="col">Product</th>
+						<th scope="col">Price</th>
+						<th scope="col">Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for detailProduct in detailsCommand %}
+						<tr class="table-borderless">
+							<td>
+								<p>Product reference :
+									{{detailProduct.product_id}}</p>
+							</td>
+							<td>
+								<p>{{detailProduct.name }}</p>
+							</td>
+							<td>
+								<p>{{ detailProduct.price }}
+									€</p>
+							</td>
+							<td>
+								<p>{{detailProduct.quantity }}
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>
+								<p>SUBTOTAL
+									{{ detailProduct.price * detailProduct.quantity }}
+									€</p>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					{% endfor %}
+					<tr>
+						<td></td>
+						<td></td>
+						<td>
+							<h3>TOTAL : {{ command.total }}€</h3>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-footer text-center">
+		<a href="/command/index" class="btn btn-sm my-2 back-color">
+			<i class="fas fa-list"></i>
+			Back to the list</a>
+	</div>
+</div>{% endblock %}

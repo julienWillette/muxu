@@ -1,0 +1,43 @@
+<div class="container">
+<form method="post">
+    <input type="hidden" value="{{ header.id }}" name="id">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" value="{{ header.title }}" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description"  value="{{ header.description }}" name="description">
+    </div>
+    <div class="form-group">
+        <label for="img_id">Select new image</label>
+        <select class="form-control" id="img_id" name="img_id" required>
+            <option value={{header.img_id}}>Ref{{header.img_id}}</option>
+            {% for image in images %}
+            {% if image.id != header.image_id %}
+            <option value={{image.id}}>Ref{{image.id}} - Product : {{image.product_name}} - Artist : {{image.artist_firstname}}  {{image.artist_lastname}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="text-center">
+        <img src="{{ header.url }}" alt="" class="img-fluid" id="img-display">
+    </div>    
+    <div class="card-footer text-center">
+        <button type="submit" value="Valider" class="btn submit-color">Submit</button>
+    </div>
+</form>
+</div>
+{% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    
+    <script>
+        document.getElementById('img_id').addEventListener('change', (e) => {
+            axios.get('/image/url/' + e.target.value)
+            .then(response => response.data)
+            .then(data => {
+                document.getElementById('img-display').src = data.url
+            })
+        })
+    </script>
+{% endblock %}

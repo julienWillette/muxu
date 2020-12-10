@@ -1,0 +1,47 @@
+<div class="container">
+    <form method="post">
+        <input type="hidden" value="{{ image.id }}" name="id">
+        <div class="form-group">
+            <label for="url">URL of new image</label>
+            <input type="text" class="form-control" id="url" value="{{ image.url }}" name="url" required>
+        </div>
+        <div class="text-center">
+            <img src="{{ image.url }}" alt="" class="img-fluid" id="img-display">
+        </div>
+        <div class="form-group">
+            <label for="product_id">Select product</label>
+            <select class="form-control" id="product_id" name="product_id">
+                <option value={{image.product_id}}>{{image.product_name}}</option>
+                <option value="">None</option>
+                {% for product in products %}
+                {% if product.id != image.product_id %}
+                <option value={{product.id}}>{{product.name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="artists">Select artist</label>
+            <select class="form-control" id="artist_id" name="artist_id">
+                <option value={{image.artist_id}}>{{image.artist_firstname}} {{image.artist_lastname}}</option>
+                <option value="">None</option>
+                {% for artist in artists %}
+                {% if artist.id != image.artist_id %}
+                <option value={{artist.id}}>{{artist.firstname}} {{artist.lastname}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" value="Valider" class="btn submit-color">Submit</button>
+        </div>
+    </form>
+    </div>
+    
+{% block javascript %}
+    <script>
+        document.getElementById('url').addEventListener('change', (e) => {
+            document.getElementById('img-display').src = e.target.value;
+        })
+    </script>
+{% endblock %}

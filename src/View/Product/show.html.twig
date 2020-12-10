@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Show {{ product.name }} product | Admin Muxu{% endblock %}
+{% block content %}
+<div class="card m-auto">
+    <div class="card-body">
+        <h1>Product</h1>
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">Description : {{product.description}}</p>
+        {% for image in images %}
+        <p class="card-text"><img src="{{image.url}}" alt="" class="img-fluid" width="350px"></p>
+        {% endfor %}
+        <p class="card-text">Artiste : {{ product.artist_firstname }} {{ product.artist_lastname }}</p>
+        <p class="card-text">Size : {{ product.size }}</p>
+        <p class="card-text">Quantity : {{ product.quantity }}</p>
+        <p class="card-text">Price : {{ product.price }}€</p>
+        <p class="card-text">Category : {{ product.category_name }}</p>
+        <p class="card-text">Activated : {{ product.is_activated ? 'Yes' : 'No' }}</p>
+    </div>
+    <div class="card-footer text-center">
+        <a href="/product/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Back to the list</a>
+        <a href="/product/edit/{{ product.id }}" class="btn btn-sm my-2 edit-color"><i class="fas fa-edit logo-edit"></i></a>
+    </div>
+</div>
+{% endblock %}

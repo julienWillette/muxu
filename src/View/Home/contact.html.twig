@@ -1,0 +1,54 @@
+{% extends 'layout_user.html.twig' %}
+{% block title %}Contact | MUXU{% endblock %}
+
+{% block content %}
+<div class="section ">
+    <div class="container mt-4">
+        <h1 class="text-center">Contact us</h1><hr>
+        <div class="row justify-content-center align-items-center ml-1 mb-4">
+            <div class="col-lg-6 col-md-12 col-sm-12 mt-2">
+                    <img src="https://www.ecoles-jaelys.com/wp-content/uploads/2019/01/decoration-maison-interieur-moderne.jpg"
+                        alt="" class="img-fluid"/>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 mt-3 d-flex">
+                <div>
+                    <p class="block-color pl-3 pb-3"><br>MUXU<br> 85 rue de la chapelle <br>75018 Paris<br>(+33)6 44 55 66 77<br>muxu@gmail.fr</p>
+                    <iframe style="border: 0;"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2710.207049454749!2d-1.5729033!3d47.2125309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec0fcda6c4cb%3A0xd620ca38dafa1e9a!2s2+Rue+La+Motte+Picquet%2C+44100+Nantes!5e0!3m2!1sfr!2sfr!4v1423244007186"
+                        width="350" height="170" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2 mb-5">
+        <div class="col-sm">
+            <form method = "POST">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" name = "firstname" placeholder="Firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" name = "lastname" placeholder="Lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="artists">You are ... </label>
+                    <select class="form-control" id="user_type" name="user_type" required>
+                        <option value="Artist">Artist</option>
+                        <option value="Buyer">Buyer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" rows="3">Type your message here</textarea required>
+                </div>
+                <button type="submit" class="btn button-color" name = "submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

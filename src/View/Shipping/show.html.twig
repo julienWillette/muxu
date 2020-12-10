@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="card m-auto">
+    <div class="card-body">
+        <h1>Shipping</h1>
+        <h5 class="card-title">{{ shipping.type }} {{ shipping.cost }}€</h5>
+    </div>
+    <div class="card-footer text-center">
+        <a href="/shipping/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Back to the list</a>
+    </div>
+</div>
+{% endblock %}

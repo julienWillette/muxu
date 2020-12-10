@@ -1,0 +1,150 @@
+{% extends 'layout_user.html.twig' %}
+{% block title %}Home Page | MUXU{% endblock %}
+
+{% block content %}
+<div class='section'>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+            <img src='https://i.postimg.cc/R09h80L1/test2.png' class="img-fluid component-home" />
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+            <img src='https://i.postimg.cc/g0hS6Vhb/banner-home.jpg' class="img-fluid component2-home" />
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-12 mx-auto p-2">
+        <h2 class="">Our cozy atmosphere</h2>
+        <p>From photographies to paintings, discover our is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
+        <div>
+            <a class="btn button-color" href="/home/products" role="button">DISCOVER OUR PRODUCTS</a>
+        </div>
+    </div>
+</div>
+<div class="section bg-home-artist">
+    <div class="col-lg-10 col-md-10 col-sm-12 mx-auto my-4 pt-4">
+        <div>
+            <h2>Featured Artists</h2>
+            <p>Meet the artists you should be keeping an eyes on</p>
+        </div>
+        <div class="row">
+            {% for header in headers %}
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card-group">
+                    <div class="card border-0 bg-home-artist">
+                        <img src="{{header.url}}" class="card-img-top img-fluid" alt="{{header.title}}">
+                        <div class="mb-2 mt-3 mr-3">
+                            <h3 class="card-title">{{header.title}} {{header.description}}</h3>
+                            <p> <a class="discover-color" href="/home/products">Discover More > </a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container-fluid">
+        <h2 class="mb-5">Search by Themes<h2>
+                <div class="mt-5 mb-3 d-none d-md-block d-lg-block">
+                    <div class="row mb-5 category-home">
+                        <div class="col-lg-3 col-md-5 mx-auto ">
+                            <div class="card border-0 contour-card-category">
+                                <form action="home/products" method="post">
+                                    <input type="text" class="d-none" name="category_id" id="category_id" value="1">
+                                    <button type="submit" class="btn">
+                                        <img src="/assets/images/category-illus/natural_green.png" href=""
+                                            class="card-img-top img-category" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-5 mx-auto">
+                            <div class="card border-0 contour-card-category">
+                                <form action="home/products" method="post">
+                                    <input type="text" class="d-none" name="category_id" id="category_id" value="3">
+                                    <button type="submit" class="btn">
+                                        <img src="/assets/images/category-illus/street_grey.png"
+                                            class="card-img-top img-category" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-5 mx-auto">
+                            <div class="card border-0 contour-card-category">
+                                <form action="home/products" method="post">
+                                    <input type="text" class="d-none" name="category_id" id="category_id" value="2">
+                                    <button type="submit" class="btn">
+                                        <img src="/assets/images/category-illus/wood_brown.png"
+                                            class="card-img-top img-category" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-5 mx-auto">
+                            <div class="card border-0 contour-card-category">
+                                <form action="home/products" method="post">
+                                    <input type="text" class="d-none" name="category_id" id="category_id" value="4">
+                                    <button type="submit" class="btn">
+                                        <img src="/assets/images/category-illus/ocean_blue.png"
+                                            class="card-img-top img-category" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div id="carouselExampleSlidesOnly" class="carousel slide d-md-none mb-3" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <form action="home/products" method="post">
+                <input type="text" class="d-none" name="category_id" id="category_id" value="1">
+                <button type="submit" class="btn">
+                    <img src="/assets/images/category-illus/natural_green.png" href=""
+                        class="card-img-top category-carousel" alt="">
+                </button>
+            </form>
+        </div>
+        <div class="carousel-item">
+            <form action="home/products" method="post">
+                <input type="text" class="d-none" name="category_id" id="category_id" value="3">
+                <button type="submit" class="btn">
+                    <img src="/assets/images/category-illus/street_grey.png" class="card-img-top category-carousel"
+                        alt="">
+                </button>
+            </form>
+        </div>
+        <div class="carousel-item">
+            <form action="home/products" method="post">
+                <input type="text" class="d-none" name="category_id" id="category_id" value="2">
+                <button type="submit" class="btn">
+                    <img src="/assets/images/category-illus/wood_brown.png" class="card-img-top category-carousel"
+                        alt="">
+                </button>
+            </form>
+        </div>
+        <div class="carousel-item">
+            <form action="home/products" method="post">
+                <input type="text" class="d-none" name="category_id" id="category_id" value="4">
+                <button type="submit" class="btn">
+                    <img src="/assets/images/category-illus/ocean_blue.png" class="card-img-top category-carousel"
+                        alt="">
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="home-block-banner">
+    <div class="image-home">
+        <img src="https://i.postimg.cc/CxZTtRRr/banner-inspiration.jpg" alt=''>
+    </div>
+    <div class="home-block-container">
+        <h2>NEED SOME INSPIRATION?</h2>
+        <a class="btn button-suggestion" href="/home/suggestion" role="button">Just for you</a>
+    </div>
+</div>
+{% endblock %}

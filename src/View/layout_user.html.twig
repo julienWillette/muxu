@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %}</title>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/12c728ad22.js" crossorigin="anonymous"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,700;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/images/favicon.png">
+    <link href="/assets/css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style_admin.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {% block stylesheet %}{% endblock %}
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light nav-bg" id="navbar_top">
+    <div class="container mt-2 mb-1">
+        <div class="row justify-content-around align-items-center">
+            <div class="col-auto d-none d-lg-block">
+                <form class="form-inline search-nav form-style" method="POST" action="/home/products">
+                    <input class="form-control nav-form-size" name="search" type="search" placeholder="Categories, artists..">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form> 
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-3 text-center">
+                <a class="navbar-brand" href="/"><img class="logoimg" src="/assets/images/muxu.png" alt="MUXU"></a>
+            </div>
+            <div class="col-lg-1 col-md-1 mr-5 d-none d-lg-block">
+                <a class="navbar-brand wall-size" href="/home/products">ArtWorks</a>
+            </div>
+            <div class="col-lg-1 col-md-1 d-none d-lg-block">
+                <a class="navbar-brand heart-color" href="/user/account"><i class="far fa-heart heart-color"></i></a>
+            </div>
+            <div class="col-lg-1 col-md-1 d-none d-lg-block">
+                {% if session.cart %}
+                <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i><span class="badge badge-danger color-badge">{{ session.count }}</span></a> 
+                    {% else %}
+                    <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i></a>
+                    {% endif %}
+            </div>
+            {% if session.user %}
+                <div class="col-auto d-none d-lg-block">
+                    <a class="navbar-brand user-size" href="/user/account"><i class="far fa-user user-color"></i></a>
+                    <a class="navbar-brand wall-size" href="/security/logout">logout</a>
+                </div>
+                    {% else %}
+                <div class="col-lg-1 col-md-1 d-none d-lg-block">
+                    <a class="navbar-brand user-size" href="/security/login"><i class="far fa-user user-color"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+        {% block content %}{% endblock %}
+<footer class="footer footer-bg d-none d-lg-block pb-4">
+    <div class="container justify-fluid-content-around pt-2">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <a class="navbar-brand " href="#"><img class="logoimg" src="/assets/images/muxu.png" alt="MUXU"></a>
+                <div class="container-fluid">
+                    <a class="navbar-brand rs-color" href="https://www.instagram.com/"><i class="fab fa-facebook-square"></i></a>
+                    <a class="navbar-brand rs-color" href="https://www.facebook.com/"><i class="fab fa-instagram-square"></i></a>
+                    <a class="navbar-brand rs-color" href="https://twitter.com/?lang=fr"><i class="fab fa-twitter-square"></i></a> 
+                    <a class="navbar-brand rs-color" href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h3 class="pt-3 links-style">Links<hr class="hr-color"></h3>
+                <p><a class="navbar-brand faq-footer" href="/home/faq">Faq</a><br>
+                <a class="navbar-brand contact-footer" href="/home/contact">Contact</a></p>
+            </div>
+            <div class="col-lg-5">
+                <h3 class="links-style">Newsletter<hr class="hr-color-newsletter"></h3>
+                <p>For <span class="more-color">More</span> Inspirations</p>
+                <form class="form-inline form-style">
+                    <input class="form-control nav-form-size" id = "newsletter" type="newsletter" placeholder="mail newsletter">
+                    <a class="btn btn-primary btn-newsletter-color" href="/home/newsletter"><i class="far fa-paper-plane"></i></a>
+                </form> 
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mt-5 pt-5 d-lg-none d-xl-none"> 
+</div>
+<nav class="footer navbar-fixed-bottom d-lg-none mt-5" id="">
+    <div class="container">
+        <div class="row justify-content-around align-items-center pt-3">
+            <div class="col-md-1 col-sm-1">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn navbar-brand user-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-palette palette-color"></i></button>
+                    <div class="dropdown-menu drop-bg">
+                        <div class="text-left pl-3">
+                           <a class="navbar-brand wall-size element-nav" href="/home/products">ArtWorks</a>
+                        </div>
+                        <div class="text-left pl-3">
+                            <a class="navbar-brand wall-size element-nav" href="/home/contact">Contact</a>
+                        </div>
+                        <div class="text-left pl-3">
+                            <a class="navbar-brand wall-size element-nav" href="/home/faq">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1">
+                <a class="navbar-brand heart-color" href="/user/account"><i class="far fa-heart heart-color"></i></a>
+            </div>
+            <div class="col-md-1 col-sm-1">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search"></i></button>
+                    <div class="dropdown-menu drop-bg-search">
+                        <form class="" method="POST" action="/home/products">
+                            <input class="input-size-responsive dropdown-item" href="" name="search" type="search" placeholder="Categories, artists..">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1">
+                {% if session.user %}
+                <div class="btn-group dropup">
+                    <button type="button" class="btn navbar-brand user-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-user user-color"></i></button>
+                    <div class="dropdown-menu drop-bg">
+                        <div class="text-center">
+                           <a class="navbar-brand wall-size element-nav" href="/user/account">Account</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="navbar-brand wall-size element-nav" href="/security/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <a class="navbar-brand user-size" href="/security/login"><i class="far fa-user user-color"></i></a>
+                {% endif %}
+            </div>
+            <div class="col-md-1 col-sm-1">
+                {% if session.cart %}
+                <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i><span
+                        class="badge badge-danger color-badge">{{ session.count }}</span></a>
+                {% else %}
+                <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+<nav class="footer navbar-fixed-bottom d-lg-none mt-5" id="">
+    <div class="container pt-3">
+        <div class="row justify-content-around align-items-center pt-3">
+            <div class="col-xs-1">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn navbar-brand user-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-palette palette-color"></i></button>
+                    <div class="dropdown-menu drop-bg">
+                        <div class="text-left pl-3">
+                           <a class="navbar-brand wall-size element-nav" href="/home/products">ArtWorks</a>
+                        </div>
+                        <div class="text-left pl-3">
+                            <a class="navbar-brand wall-size element-nav" href="/home/contact">Contact</a>
+                        </div>
+                        <div class="text-left pl-3">
+                            <a class="navbar-brand wall-size element-nav" href="/home/faq">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1">
+                <a class="navbar-brand heart-color" href="/user/account"><i class="far fa-heart heart-color"></i></a>
+            </div>
+            <div class="col-xs-1">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search"></i></button>
+                    <div class="dropdown-menu drop-bg-search">
+                        <form class="" method="POST" action="/home/products">
+                            <input class="input-size-responsive dropdown-item" href="" name="search" type="search" placeholder="Categories, artists..">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1">
+                {% if session.user %}
+                <div class="btn-group dropup">
+                    <button type="button" class="btn navbar-brand user-size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-user user-color"></i></button>
+                    <div class="dropdown-menu drop-bg">
+                        <div class="text-center">
+                           <a class="navbar-brand wall-size element-nav" href="/user/account">Account</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="navbar-brand wall-size element-nav" href="/security/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <a class="navbar-brand user-size" href="/security/login"><i class="far fa-user user-color"></i></a>
+                {% endif %}
+            </div>
+            <div class="col-xs-1">
+                {% if session.cart %}
+                <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i><span
+                        class="badge badge-danger color-badge">{{ session.count }}</span></a>
+                {% else %}
+                <a class="navbar-brand" href="/home/cart"><i class="fas fa-shopping-bag basket-size"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!-- /#page-content-wrapper -->
+<!-- /#wrapper -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+crossorigin="anonymous"></script>
+
+<script>
+    if ($(window).width() > 275) {
+        $(window).scroll(function(){  
+           if ($(this).scrollTop() > 40) {
+              $('#navbar_top').addClass("fixed-top");
+              // add padding top to show content behind navbar
+              $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+            }else{
+              $('#navbar_top').removeClass("fixed-top");
+               // remove padding top from body
+              $('body').css('padding-top', '0');
+            }   
+        });
+      } 
+</script>
+{% block javascript %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<div class="container">
+<form method="post">
+    <input type="hidden" value="{{ artist.id }}" name="id">
+    <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input type="text" class="form-control" id="firstname" value="{{ artist.firstname }}" name="firstname" required>
+    </div>
+    <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input type="text" class="form-control" id="lastname" value="{{ artist.lastname }}" name="lastname" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" value="">{{ artist.description }}</textarea>
+    </div>
+    <div class="card-footer text-center">
+    <button type="submit" value="Valider" class="btn submit-color">Submit</button>
+    </div>
+</form>
+</div>

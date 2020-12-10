@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+{% block title %}List sizes | Admin Muxu{% endblock %}
+{% block content %}
+<h2 class="display-4">Sizes</h2>
+<div class="text-right my-3">
+    <a href="/size/add" class="btn btn-sm plus-color">Add a size <i class="fas fa-plus-circle"></i></a>
+</div>
+<table class="table table-responsive{-sm|-md|-lg|-xl} table-bg">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for size in sizes %}
+        <tr>
+            <td>{{ size.format }}</td>
+            <td>
+                <a href="/size/show/{{ size.id }}" class="btn btn-sm my-2 eye-color"><i
+                        class="fas fa-eye logo-eye"></i></a>
+                <a href="/size/edit/{{ size.id }}" class="btn btn-sm my-2 edit-color"><i
+                        class="fas fa-edit logo-edit"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

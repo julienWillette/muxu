@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Edit section | Admin Muxu{% endblock %}
+{% block content %}
+    <h1>Edit home section {{ header.title }}</h1>
+    <div class="container">
+        <span>Current image</span>
+        <img src="{{header.url}}" alt="" class="img-fluid" width="150px">
+    </div>
+    {% include 'Header/_form.html.twig' %}
+    <a href="/header/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Return to the list</a><br>
+    <a href="/header/show/{{ header.id }}" class="btn btn-sm my-2 back-color">Back</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Show image | Admin Muxu{% endblock %}
+{% block content %}
+    <div class="card m-auto">
+        <div class="card-body">
+            <h1>Image</h1>
+            <img src="{{image.url}}" alt="" class="img-fluid" width="350px">
+            <p class="card-text">Artist associated : {{image.artist_firstname}} {{image.artist_lastname}}</p>
+            <p class="card-text">Product associated : {{ image.product_name }}</p>
+        </div>
+        <div class="card-footer text-center">
+            <a href="/image/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Back to the list</a>
+            <a href="/image/edit/{{ image.id }}" class="btn btn-sm my-2 edit-color"><i class="fas fa-edit logo-edit"></i></a>
+        </div>
+    </div>
+{% endblock %}
